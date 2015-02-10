@@ -26,7 +26,9 @@
                 children          : [],
                 primaryResource   : null,
                 resources         : [],
-                excludedResources : []
+                excludedResources : [],
+                isSequence        : false,
+                isActivity        : false
             };
 
             return {
@@ -44,6 +46,10 @@
                         newStep.name = 'Step' + '-' + stepId;
                         newStep.lvl = step.lvl + 1;
                     }
+
+                    if (step.isSequence) {
+                        newStep.isActivity = true;
+                    };
 
                     newStep.id = stepId;
 
@@ -141,6 +147,12 @@
                     }
 
                     return resourceExists;
+                },
+
+                toggleSequence: function (step) {
+                    step.isSequence ? step.isSequence = false : step.isSequence = true;
+
+                    return this;
                 }
             };
         }

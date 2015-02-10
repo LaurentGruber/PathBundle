@@ -131,6 +131,18 @@
                     controller: 'TemplateModalCtrl'
                 });
             };
+
+            $scope.toggleSequence = function(step) {
+                StepFactory.toggleSequence(step);
+            };
+
+            $scope.canBeSequenceToggled = function(step) {
+                if (step.children.length > 0 || step.isActivity) {
+                    return false;
+                };
+
+                return true;
+            };
         }
     ]);
 })();
